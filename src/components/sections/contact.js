@@ -9,6 +9,8 @@ import { useOnScreen } from "../../hooks"
 import ContentWrapper from "../../styles/ContentWrapper"
 import Underlining from "../../styles/Underlining"
 import Social from "../social"
+import  logo from '../../content/devfitz_logo.svg'
+import  dflogo from '../../content/portfolio-logo.svg'
 
 const StyledSection = styled(motion.section)`
   width: 100%;
@@ -76,7 +78,11 @@ const Contact = ({ content }) => {
         <h3>{frontmatter.title}</h3>
         <MDXRenderer>{body}</MDXRenderer>
         <div className="profile">
-          <Img className="avatar" fluid={frontmatter.profileImage.childImageSharp.fluid} />
+          {/* <Img className="avatar" fluid={frontmatter.profileImage.childImageSharp.fluid} /> */}
+          <div style={{paddingRight: '20px'}}>
+            {/* <img width='61' height='150' src={logo}/> */}
+            <img width='100' height='100' src={dflogo}/>
+          </div>
           <div className="details">
             <strong>{frontmatter.name}</strong>
             <br />

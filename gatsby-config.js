@@ -1,7 +1,13 @@
 const config = require('./src/config');
 const theme = require('./src/styles/Theme')
 
+// needed to import his for env var in graphql
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`, 
+})
+
 module.exports = {
+  // commonly used data in site
   siteMetadata: {
     title: config.siteTitle,
     description: config.siteDescription,
@@ -58,6 +64,32 @@ module.exports = {
         path: `${__dirname}/src/content`,
         name: `content`,
       },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages`,
+        name: `pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/markdown`,
+        name: `pagesMDX`,
+      },
+    },
+    { 
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "GitHub",
+        fieldName: "github",
+        url: "https://api.github.com/graphql",
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        },
+        fetchOptions: {},
+      }
     },
   ],
 }

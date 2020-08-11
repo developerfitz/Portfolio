@@ -114,13 +114,13 @@ const Hero = ({ content }) => {
             </div>
             {frontmatter.title}
           </h1>
-          <h2 className="subtitle">
+          {/* <h2 className="subtitle">
             {frontmatter.subtitlePrefix}{" "}
-            {/* Hover state color can be set in useEffect hook */}
+            Hover state color can be set in useEffect hook 
             <AnimatedUnderlining animate={uControls} color="tertiary" big>
               {frontmatter.subtitle}
             </AnimatedUnderlining>
-          </h2>
+          </h2> */}
           <div className="description">
             <MDXRenderer>{body}</MDXRenderer>
           </div>

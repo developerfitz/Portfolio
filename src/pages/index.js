@@ -14,7 +14,7 @@ import { splashScreen } from "../config"
 
 const IndexPage = ({ data }) => (
   <Layout splashScreen={splashScreen}>
-    <SEO title="Portfolio Minimal - A Gatsby Starter." />
+    <SEO title="Developer Fitz - My Techlab" />
     <Hero content={data.hero.edges} />
     {/* Articles is populated via Medium RSS Feed fetch */}
     <Articles />
@@ -40,8 +40,6 @@ export const pageQuery = graphql`
         frontmatter {
           greetings
           title
-          subtitlePrefix
-          subtitle
           icon {
             childImageSharp {
               fluid(maxWidth: 60, quality: 90) {

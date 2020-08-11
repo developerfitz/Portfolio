@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
+import { useStaticQuery, graphql } from 'gatsby'
 import styled from "styled-components"
 import SkeletonLoader from "tiny-skeleton-loader-react"
 import { motion, useAnimation } from "framer-motion"
@@ -10,6 +11,7 @@ import ContentWrapper from "../../styles/ContentWrapper"
 import Underlining from "../../styles/Underlining"
 
 const { mediumRssFeed, shownArticles } = config
+
 
 const StyledSection = motion.custom(styled.section`
   width: 100%;
@@ -120,24 +122,59 @@ const Articles = () => {
   const { isIntroDone } = useContext(Context).state
   const [articles, setArticles] = useState()
   const articlesControls = useAnimation()
-  
+
+
   // Load and display articles after the splashScreen sequence is done
+  const {
+    github: {
+      repositoryOwner: {
+        repositories: { edges }
+      }
+    }
+    } = useStaticQuery(graphql`
+      query { 
+        github {
+          repositoryOwner(login: "developerfitz") {
+            repositories(first: 3, ownerAffiliations: OWNER, orderBy: { field: STARGAZERS, direction: DESC }) {
+              edges {
+                node {
+                  id
+                  name
+                  url
+                  description
+                  stargazers {
+                    totalCount
+                  }
+                  forkCount
+                }
+              }
+            }
+          }
+        }
+      }
+    `)
+
   useEffect(() => {
     const loadArticles = async () => {
+      // splash screen sets isIntroDone to true
       if (isIntroDone) {
         await articlesControls.start({ opacity: 1, y: 0, transition: { delay: 1 } })
         // MediumRssFeed is set in config.js
-        fetch(mediumRssFeed, { headers: { Accept: "application/json" } })
-        .then(res => res.json())
-        // Feed also contains comments, therefore we filter for articles only
-        .then(data => data.items.filter(item => item.categories.length > 0))
-        .then(newArticles => newArticles.slice(0, MAX_ARTICLES))
-        .then(articles => setArticles(articles))
-        .catch(error => console.log(error))
+        // fetch(mediumRssFeed, { headers: { Accept: "application/json" } })
+        // .then(res => res.json())
+        // // Feed also contains comments, therefore we filter for articles only
+        // .then(data => data.items.filter(item => item.categories.length > 0))
+        // .then(newArticles => newArticles.slice(0, MAX_ARTICLES))
+        // .then(articles => setArticles(articles))
+        setArticles(edges)
+        // .catch(error => console.log(error))
       }
     }
     loadArticles()
   },[isIntroDone, articlesControls, MAX_ARTICLES])
+
+  // const test = edges.map( obj => obj.node.name)
+  // console.log(articles)
 
   return (
     <StyledSection
@@ -146,9 +183,49 @@ const Articles = () => {
       animate={articlesControls}
     >
       <StyledContentWrapper>
-        <h3 className="section-title">Latest Articles on Medium</h3>
+        <h3 className="section-title">Projects</h3>
         <div className="articles">
           {articles
+            ? articles.map(obj => (
+                <a
+                  href={obj.node.url}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  title={obj.node.name}
+                  aria-label={obj.node.url}
+                  key={obj.node.id}
+                >
+                  <div className="card">
+                    <span className="category">
+                      <Underlining color="tertiary" hoverColor="secondary">
+                        {obj.node.name}
+                      </Underlining>
+                    </span>
+                    <h4 className="title">{obj.node.description}</h4>
+                    {/* <span className="date">{parseDate(node.pubDate)}</span> */}
+                  </div>
+                </a>
+              ))
+            : [...Array(MAX_ARTICLES)].map((i, key) => (
+              <div className="card" key={key}>
+                <SkeletonLoader 
+                  background="#f2f2f2"
+                  height="1.5rem" 
+                  style={{ marginBottom: ".5rem" }}
+                />
+                <SkeletonLoader 
+                  background="#f2f2f2" 
+                  height="4rem"
+                />
+                <SkeletonLoader 
+                  background="#f2f2f2" 
+                  height=".75rem" 
+                  width="50%" 
+                  style={{ marginTop: ".5rem" }}
+                />
+              </div>
+            ))}
+          {/* {articles
             ? articles.map(item => (
                 <a
                   href={item.link}
@@ -187,7 +264,7 @@ const Articles = () => {
                   style={{ marginTop: ".5rem" }}
                 />
               </div>
-            ))}
+            ))} */}
         </div>
       </StyledContentWrapper>
     </StyledSection>

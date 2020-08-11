@@ -1,0 +1,16 @@
+import { graphql } from 'gatsby'
+
+# My MDX Page
+
+<p>{props.data.site.siteMetadata.title}</p>
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        description
+        title
+      }
+    }
+  }
+`
