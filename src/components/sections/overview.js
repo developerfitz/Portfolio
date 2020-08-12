@@ -49,7 +49,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
         padding-left: 0;
       }
     }
-    .projects {
+    .overviews {
       display: flex;
       flex-direction: row;
       margin-top: -2.5rem;
@@ -196,9 +196,9 @@ const StyledProject = styled(motion.div)`
   }
 `
 
-const Projects = ({ content }) => {
+const Overview = ({ content }) => {
   const sectionDetails = content[0].node
-  const projects = content.slice(1, content.length)
+  const overviews = content.slice(1, content.length)
 
   // visibleProject is needed to show which project is currently
   // being viewed in the horizontal slider on mobile and tablet
@@ -227,7 +227,7 @@ const Projects = ({ content }) => {
     // required for animations: set visibility for all projects to
     // "false" initially
     let initial = {}
-    projects.forEach(project => {
+    overviews.forEach(project => {
       initial[project.node.frontmatter.position] = false
     })
     setOnScreen(initial)
@@ -250,7 +250,7 @@ const Projects = ({ content }) => {
   }
 
   return (
-    <StyledSection id="projects">
+    <StyledSection id="overviews">
       <StyledContentWrapper>
         <motion.div
           ref={tRef}
@@ -259,11 +259,11 @@ const Projects = ({ content }) => {
         >
           <h3 className="section-title">{sectionDetails.frontmatter.title}</h3>
           <div className="counter">
-            {visibleProject} / {projects.length}
+            {visibleProject} / {overviews.length}
           </div>
         </motion.div>
-        <div className="projects">
-          {projects.map(project => {
+        <div className="overviews">
+          {overviews.map(project => {
             const { body, frontmatter } = project.node
             return (
               <VisibilitySensor
@@ -354,7 +354,7 @@ const Projects = ({ content }) => {
   )
 }
 
-Projects.propTypes = {
+Overview.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
@@ -365,4 +365,4 @@ Projects.propTypes = {
   ).isRequired,
 }
 
-export default Projects
+export default Overview
