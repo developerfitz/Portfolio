@@ -22,14 +22,14 @@ module.exports = {
     // There are icons available for the following platforms: 
     // Medium, GitHub, LinkedIn, XING, Behance
     socialMedia: [
-        {
-            name: 'Resume',
-            url: '/resume'
-        }
         // {
-        //     name: "Github",
-        //     url: "https://github.com/developerfitz"
-        // },
+        //     name: 'Resume',
+        //     url: '/resume'
+        // }
+        {
+            name: "Github",
+            url: "https://github.com/developerfitz"
+        },
         // {
         //     name: "Linkedin",
         //     url: ""
@@ -63,10 +63,10 @@ module.exports = {
                 url: "/about"
             }
         ],
-        button: {
-            name: "Resume",
-            url: "/resume",
-        }
+        // button: {
+        //     name: "Resume",
+        //     url: "/resume",
+        // }
     },
 
     footerLinks: [
