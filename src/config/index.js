@@ -77,6 +77,18 @@ module.exports = {
         {
             name: "Imprint",
             url: "/imprint"
-        }
+        },
+        // {
+        //     name: "linkedin",
+        //     url: ''
+        // },
+        // {
+        //     name: "linkedin",
+        //     url: ''
+        // },
+        // {
+        //     name: "linkedin",
+        //     url: ''
+        // },
     ]
 }

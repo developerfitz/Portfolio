@@ -5,7 +5,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Hero from "../components/sections/hero"
-import Articles from "../components/sections/articles" 
+import Repos from "../components/sections/repos" 
 import About from "../components/sections/about"
 import Interests from "../components/sections/interests"
 import Overview from "../components/sections/overview"
@@ -17,7 +17,7 @@ const IndexPage = ({ data }) => (
     <SEO title="Developer Fitz - My Techlab" />
     <Hero content={data.hero.edges} />
     {/* Articles is populated via Medium RSS Feed fetch */}
-    <Articles />
+    <Repos />
     <About content={data.about.edges} />
     <Interests content={data.interests.edges} />
     <Overview content={data.overview.edges} />
@@ -110,7 +110,6 @@ export const pageQuery = graphql`
           tags
           position
           buttonVisible
-          buttonUrl
           buttonText
         }
       }

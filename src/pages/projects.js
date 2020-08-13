@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Layout from '../components/layout'
 // // import { Container, Card } from 'Common';
 // // import starIcon from 'Static/icons/star.svg';
 // // import forkIcon from 'Static/icons/fork.svg';
@@ -67,12 +68,14 @@ export default function GithubProjects(props) {
       // }
 
   return (
-    <div>
-      <h1><a href='/'>Github Repos</a></h1>
-      {edges.map( ({node}) => (
-        <li key={node.id}><a href={node.url}>{node.name.toLowerCase()}</a></li>
-        ))}
-    </div>
+    <Layout>
+      <div>
+        <h1><a href='/'>Github Repos</a></h1>
+        {edges.map( ({node}) => (
+          <li key={node.id}><a href={node.url}>{node.name.toLowerCase()}</a></li>
+          ))}
+      </div>
+    </Layout>
   )
 }
 

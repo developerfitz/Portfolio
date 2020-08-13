@@ -114,13 +114,13 @@ const StyledContentWrapper = styled(ContentWrapper)`
   }
 `
 
-const Articles = () => {
+const Repos = () => {
   // shownArticles is set in config.js, due to the rss feed loader
   // it is currently limited to max 3
   const MAX_ARTICLES = shownArticles
 
   const { isIntroDone } = useContext(Context).state
-  const [articles, setArticles] = useState()
+  const [repos, setRepos] = useState()
   const articlesControls = useAnimation()
 
 
@@ -155,7 +155,7 @@ const Articles = () => {
     `)
 
   useEffect(() => {
-    const loadArticles = async () => {
+    const loadRepos = async () => {
       // splash screen sets isIntroDone to true
       if (isIntroDone) {
         await articlesControls.start({ opacity: 1, y: 0, transition: { delay: 1 } })
@@ -166,11 +166,11 @@ const Articles = () => {
         // .then(data => data.items.filter(item => item.categories.length > 0))
         // .then(newArticles => newArticles.slice(0, MAX_ARTICLES))
         // .then(articles => setArticles(articles))
-        setArticles(edges)
+        setRepos(edges)
         // .catch(error => console.log(error))
       }
     }
-    loadArticles()
+    loadRepos()
   },[isIntroDone, articlesControls, MAX_ARTICLES])
 
   // const test = edges.map( obj => obj.node.name)
@@ -185,23 +185,23 @@ const Articles = () => {
       <StyledContentWrapper>
         <h3 className="section-title">Projects</h3>
         <div className="articles">
-          {articles
-            ? articles.map(obj => (
+          {repos
+            ? repos.map( ({ node }) => (
                 <a
-                  href={obj.node.url}
+                  href={node.url}
                   target="_blank"
                   rel="nofollow noopener noreferrer"
-                  title={obj.node.name}
-                  aria-label={obj.node.url}
-                  key={obj.node.id}
+                  title={node.name}
+                  aria-label={node.url}
+                  key={node.id}
                 >
                   <div className="card">
                     <span className="category">
                       <Underlining color="tertiary" hoverColor="secondary">
-                        {obj.node.name}
+                        {node.name}
                       </Underlining>
                     </span>
-                    <h4 className="title">{obj.node.description}</h4>
+                    <h4 className="title">{node.description}</h4>
                     {/* <span className="date">{parseDate(node.pubDate)}</span> */}
                   </div>
                 </a>
@@ -271,4 +271,4 @@ const Articles = () => {
   )
 }
 
-export default Articles
+export default Repos

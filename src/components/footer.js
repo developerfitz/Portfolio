@@ -40,6 +40,7 @@ const StyledLink = styled(Link)`
   text-transform: uppercase;
   color: #ffffff;
   letter-spacing: 1px;
+  padding-left: 1rem;
 `
 
 const Footer = () => (

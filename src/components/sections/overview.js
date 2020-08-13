@@ -11,6 +11,7 @@ import ContentWrapper from "../../styles/ContentWrapper"
 import Underlining from "../../styles/Underlining"
 import Button from "../../styles/Button"
 import Icon from "../../components/icons"
+import resume from '../../content/Fitzhugh_Software_Resume.pdf'
 
 const StyledSection = styled.section`
   width: 100%;
@@ -227,8 +228,8 @@ const Overview = ({ content }) => {
     // required for animations: set visibility for all projects to
     // "false" initially
     let initial = {}
-    overviews.forEach(project => {
-      initial[project.node.frontmatter.position] = false
+    overviews.forEach(overview => {
+      initial[overview.node.frontmatter.position] = false
     })
     setOnScreen(initial)
   }, [])
@@ -263,8 +264,8 @@ const Overview = ({ content }) => {
           </div>
         </motion.div>
         <div className="overviews">
-          {overviews.map(project => {
-            const { body, frontmatter } = project.node
+          {overviews.map(overview => {
+            const { body, frontmatter } = overview.node
             return (
               <VisibilitySensor
                 key={frontmatter.position}
@@ -340,7 +341,8 @@ const Overview = ({ content }) => {
         variants={bVariants}
         animate={bOnScreen ? "visible" : "hidden"}
         className="cta-btn"
-        href={sectionDetails.frontmatter.buttonUrl}
+        // href={sectionDetails.frontmatter.buttonUrl}
+        href={resume}
         target="_blank"
         rel="nofollow noopener noreferrer"
         aria-label="External Link"
