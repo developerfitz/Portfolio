@@ -38,9 +38,9 @@ const Layout = ({ children, splashScreen }) => {
       <Context.Provider value={{ state, setState }}>
         <ThemeProvider theme={Theme}>
           <GlobalStyle />
-          <Header />
+          {/* <Header /> */}
           <main id="main-content">{children}</main>
-          <Footer />
+          {/* <Footer /> */}
         </ThemeProvider>
       </Context.Provider>
     </StyledLayoutWrapper>
