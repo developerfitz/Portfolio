@@ -1,3 +1,12 @@
+# pages taken out until further development
+pages/about
+pages/projects
+pages/resume
+pages/skills
+pages/imprint
+pages/privacy
+
+
 # Logs
 logs
 *.log
