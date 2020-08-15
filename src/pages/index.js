@@ -54,10 +54,16 @@ const ComingSoon = styled.div`
   }
   .socialIcons a {
     margin: 0.75rem;
+    /* transition: all 0.2s ease-in; */
+    /* &:hover { */
+      /* transform: scale(1.3); */
+    }
+  /* .socialIcons .icon {
     transition: all 0.2s ease-in;
     &:hover {
       transform: scale(1.3);
-    }
+    } */
+  }
     /* padding-top:0.25; */
     /* display: flex; */
     /* list-style-type: none; */
@@ -118,7 +124,14 @@ const icons = {
     //   ease: 'easeOut' 
     // },
   },
-  hidden: { y: 50, opacity: 0 }
+  hidden: { y: 50, opacity: 0 },
+  hover: {
+    scale: 1.3,
+    transition: {
+      duration: 0.2,
+      delay: 0
+    }
+  }
 }
 
 const IndexPage = ({ data }) => (
@@ -174,16 +187,23 @@ const IndexPage = ({ data }) => (
         <motion.a 
           animate='visible'
           initial='hidden'
+          // animate={{ y: 0, opacity: 1 }}
+          // initial={{ y: 50, opacity: 0}}
+          whileHover='hover'
+          // whileHover={{ scale: 1.2 }}
+          // onHoverStart={e => {}}
+          // onHoverEnd={e => {}}
           variants={icons}
           transition={{ duration: 0.3, delay: 1, ease: 'easeOut' }}
           className='icon'
           href='https://github.com/developerfitz'
         >
-          <img src={githubIcon}/>
+          <img className='icon' src={githubIcon}/>
         </motion.a>
         <motion.a 
           animate='visible'
           initial='hidden'
+          whileHover='hover'
           variants={icons}
           transition={{ duration: 0.3, delay: 1.8, ease: 'easeOut' }}
           className='icon'
@@ -194,6 +214,7 @@ const IndexPage = ({ data }) => (
         <motion.a 
           animate='visible'
           initial='hidden'
+          whileHover='hover'
           variants={icons}
           transition={{ duration: 0.3, delay: 1.4, ease: 'easeOut' }}
           className='icon'
@@ -204,6 +225,7 @@ const IndexPage = ({ data }) => (
         <motion.a 
           animate='visible'
           initial='hidden'
+          whileHover='hover'
           variants={icons}
           transition={{ duration: 0.3, delay: 2.2, ease: 'easeOut'}}
           className='icon'
