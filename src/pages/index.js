@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import Logo from '../components/logo'
 import Button from "../styles/Button"
 import linkedinIcon from '../content/icons8-linkedin_32a.svg'
@@ -55,7 +56,7 @@ const ComingSoon = styled.div`
     margin: 0.75rem;
     transition: all 0.2s ease-in;
     &:hover {
-      transform: scale(1.2);
+      transform: scale(1.3);
     }
     /* padding-top:0.25; */
     /* display: flex; */
@@ -97,6 +98,28 @@ const StyledButton = styled.button`
     margin-bottom: -.175rem;
   }
 `
+const div = {
+  visible: {
+    opacity: 1,
+    transition: {
+      // when: 'beforeChildren',
+      staggerChildren: 1
+    }
+  },
+  hidden: { opacity: 0 }
+}
+
+const icons = {
+  visible: { 
+    y: 0, 
+    opacity: 1, 
+    // transition: {
+    //   // duration: 0.3,
+    //   ease: 'easeOut' 
+    // },
+  },
+  hidden: { y: 50, opacity: 0 }
+}
 
 const IndexPage = ({ data }) => (
   <Layout splashScreen={splashScreen}>
@@ -110,28 +133,100 @@ const IndexPage = ({ data }) => (
     {/* <Contact content={data.contact.edges} /> */}
     {/* <StyledHero> */}
     <ComingSoon>
-      <h1>Portfolio Underconstruction</h1>
-      <h2>Coming Soon</h2>
+      {/* <h1>Portfolio Underconstruction</h1> */}
+      <h1
+        // animate={{ x: 0, opacity: 1 }}
+        // initial={{ x: -200, opacity: 0 }}
+        // transition={{ ease: 'easeOut', duration: 0.5, delay: 0.3 }}
+      >Coming Soon</h1>
       {/* TODO: change size back to 89.017 */}
-      <Logo />
-      <h3>Get In Touch</h3>
-      <a className='email' href="mailto:julius@developerfitz.com">julius@developerfitz.com</a>
+      <motion.div 
+        // animate={{ scale: [0.5, 0.8, 0.2, 1.2, 0.9, 1.3, 1]}}
+        // transition={{ duration: 2 }}
+      >
+        <Logo />
+      </motion.div>
+      <motion.div 
+        animate={{ rotateX: 0 }}
+        initial={{ rotateX: 90 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        // transition={{ iterationCount: 'infinite'}}
+      >
+        <motion.h3 
+          // animate={{ rotateX: 0 }}
+          // initial={{ rotateX: 90 }}
+          // transition={{ duration: 0.5, delay: 1 }}
+          // transition={{ iterationCount: 'infinite'}}
+        >Get In Touch</motion.h3>
+        <a className='email' href="mailto:julius@developerfitz.com">julius@developerfitz.com</a>
+      </motion.div>
         {/* <button><a href=''>Github</a></button> */}
         {/* <button><a href=''>Linkedin</a></button> */}
         {/* <button><a href=''>Telegram</a></button> */}
         {/* <button><a href=''>Twitter</a></button> */}
-      <div className="socialIcons">
-        <a href='https://github.com/developerfitz'><img src={githubIcon}/></a>
-        <a href='https://www.linkedin.com/in/fitzj/'><img src={linkedinIcon}/></a>
-        <a href='https://twitter.com/DeveloperFitz'><img src={twitterIcon}/></a>
-        <a href='https://t.me/fitzj'><img src={telegramIcon}/></a>
-      </div>
-      <h3>Looking for a developer?</h3>
+      <motion.div 
+        // animate='visible' //{{ opacity: 1 }} 
+        // initial='hidden' //{{ y: 50, opacity: 0 }}
+        // variants={div}
+        // transition={{ duration: 1, delay: 1 }}
+        className="socialIcons"
+      >
+        <motion.a 
+          animate='visible'
+          initial='hidden'
+          variants={icons}
+          transition={{ duration: 0.3, delay: 1, ease: 'easeOut' }}
+          className='icon'
+          href='https://github.com/developerfitz'
+        >
+          <img src={githubIcon}/>
+        </motion.a>
+        <motion.a 
+          animate='visible'
+          initial='hidden'
+          variants={icons}
+          transition={{ duration: 0.3, delay: 1.8, ease: 'easeOut' }}
+          className='icon'
+          href='https://www.linkedin.com/in/fitzj/'
+        >
+          <img src={linkedinIcon}/>
+        </motion.a>
+        <motion.a 
+          animate='visible'
+          initial='hidden'
+          variants={icons}
+          transition={{ duration: 0.3, delay: 1.4, ease: 'easeOut' }}
+          className='icon'
+          href='https://twitter.com/DeveloperFitz'
+        >
+          <img src={twitterIcon}/>
+        </motion.a>
+        <motion.a 
+          animate='visible'
+          initial='hidden'
+          variants={icons}
+          transition={{ duration: 0.3, delay: 2.2, ease: 'easeOut'}}
+          className='icon'
+          href='https://t.me/fitzj'
+        >
+          <img src={telegramIcon}/>
+        </motion.a>
+      </motion.div>
+      <motion.h3
+        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: -50, opacity: 0 }}
+        transition={{ duration: 0.7, delay: 3, ease: 'easeOut' }}
+      >Looking for a developer?</motion.h3>
       {/* TODO: use motionjs to have the slide affect button */}
-      <a href={resume}>
-        <StyledButton type="button" textAlign="center" color="#13a740" center
+      <motion.a 
+        href={resume}
+        animate={{ x: 0, opacity: 1 }}
+        initial={{ x: 250, opacity: 0 }} 
+        transition={{ ease: 'easeOut', duration: 1, delay: 4.2 }} 
+      >
+        <StyledButton type="button" textAlign="center" center
         >View Resume</StyledButton>
-      </a>
+      </motion.a>
     </ComingSoon>
     {/* </StyledHero> */}
   </Layout>
